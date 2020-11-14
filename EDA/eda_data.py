@@ -95,7 +95,7 @@ def plot_dtobito():
     st.altair_chart((graph).configure_view(strokeOpacity=0).configure_title(fontSize=12).properties(width=700, height=410))
 
 def plot_codmunres():
-    gdf = gpd.read_file('./EDA/BRMUE250GC_SIR.shp')
+    gdf = gpd.read_file('Maps/BRMUE250GC_SIR.shp')
     
     cadmun = pd.read_csv('./EDA/CADMUN.csv')
     cadmun = cadmun[["MUNCOD", "MUNCODDV"]]

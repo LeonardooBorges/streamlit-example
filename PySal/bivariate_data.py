@@ -8,20 +8,19 @@ from libpysal.weights import WSP
 from libpysal.weights.contiguity import Queen
 from esda.moran import Moran_Local_BV, Moran
 
-root = "../"
 weights = None
 mapper = None
 
 def get_municipalities_shape():
-  return gpd.read_file(root + 'Maps/BRMUE250GC_SIR.shp')
+  return gpd.read_file('Maps/BRMUE250GC_SIR.shp')
 
 def get_muncods():
-  cadmun = pd.read_csv(root + 'CSV/Cadmun/CADMUN.csv')
+  cadmun = pd.read_csv('CSV/Cadmun/CADMUN.csv')
   cadmun = cadmun[["MUNCOD", "MUNCODDV"]]
   return cadmun
 
 def get_avg_suicide_rates():
-  suicide = pd.read_csv(root + 'CSV/Suicide/suicide_rates_08_18.csv', sep=',', index_col=0)
+  suicide = pd.read_csv('CSV/Suicide/suicide_rates_08_18.csv', sep=',', index_col=0)
   suicide['AVG_SUICIDE_RATE'] = np.mean(suicide.filter(regex=("RATE_*")), axis=1)
   return suicide[['MUNCOD', 'AVG_SUICIDE_RATE']]
 
@@ -58,7 +57,7 @@ def get_disease_dataset(disease):
   print(disease)
   disease_csv_name = get_disease_csv_name(disease)
   path = 'CSV/TabNet/Internacoes_Rate/{}.csv'.format(disease_csv_name)
-  disease = pd.read_csv(root + path, sep=',', index_col=0)
+  disease = pd.read_csv(path, sep=',', index_col=0)
   disease['AVG_DISEASE_RATE'] = np.mean(disease.filter(regex=("RATE_*")), axis=1)
   disease = disease[['MUNCOD', 'AVG_DISEASE_RATE']]
   return disease
