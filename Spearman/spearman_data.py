@@ -5,8 +5,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import spearmanr
 import streamlit as st
 
-root = "../"
-path = root + "CSV/TabNet/Internacoes_Rate/"
+path = "CSV/TabNet/Internacoes_Rate/"
 corrs_df = pd.read_csv("Spearman/correlation.csv",index_col=0)
 
 def get_top_correlations(ascending = False):
@@ -15,7 +14,7 @@ def get_top_correlations(ascending = False):
 
 def plot_disease_vs_suicide(disease):
     csv_disease = mapper[mapper['SELECT_NAME'] == disease]['CSV'].values[0]
-    suicide_df = pd.read_csv(root + 'CSV/Suicide/suicide_rates_08_18.csv', sep=',', index_col=0)
+    suicide_df = pd.read_csv('CSV/Suicide/suicide_rates_08_18.csv', sep=',', index_col=0)
     suicide_df["SUICIDE"] = suicide_df.drop(columns="MUNCOD").sum(axis=1)/(len(suicide_df.columns) - 1)
     disease_df = pd.read_csv(path + csv_disease + '.csv', sep=',', index_col=0) 
     disease_df["Total"] = disease_df.drop(columns="MUNCOD").sum(axis=1)/(len(disease_df.columns) - 1)
